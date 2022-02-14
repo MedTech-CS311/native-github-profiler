@@ -1,12 +1,21 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import Profile from "./screens/Profile";
+import Repos from "./screens/Repos";
+
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>hello world</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Profile" component={Profile} />
+        <Tab.Screen name="Repos" component={Repos} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
