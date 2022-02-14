@@ -8,37 +8,42 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
+    <Provider store={store}>
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
 
-            if (route.name === "Profile") {
-              iconName = focused ? "person-circle" : "person-circle-outline";
-            } else if (route.name === "Repos") {
-              iconName = focused ? "list-circle" : "list-circle-outline";
-            }
+              if (route.name === "Profile") {
+                iconName = focused ? "person-circle" : "person-circle-outline";
+              } else if (route.name === "Repos") {
+                iconName = focused ? "list-circle" : "list-circle-outline";
+              }
 
-            // You can return any component that you like here!
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: "black",
-          tabBarInactiveTintColor: "gray",
-        })}
-      >
-        <Tab.Screen name="Profile" component={Profile} />
-        <Tab.Screen
-          name="Repos"
-          component={Repos}
-          options={{ tabBarBadge: 0 }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+              // You can return any component that you like here!
+              return <Ionicons name={iconName} size={size} color={color} />;
+            },
+            tabBarActiveTintColor: "black",
+            tabBarInactiveTintColor: "gray",
+          })}
+        >
+          <Tab.Screen name="Profile" component={Profile} />
+          <Tab.Screen
+            name="Repos"
+            component={Repos}
+            options={{ tabBarBadge: 0 }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
