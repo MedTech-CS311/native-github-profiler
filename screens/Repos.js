@@ -1,11 +1,9 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function App() {
+export default function Repos() {
   return (
     <View style={styles.container}>
-      <Text>hello world</Text>
-      <StatusBar style="auto" />
+      <Text>hello from repos</Text>
     </View>
   );
 }
