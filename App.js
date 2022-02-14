@@ -32,7 +32,11 @@ export default function App() {
         })}
       >
         <Tab.Screen name="Profile" component={Profile} />
-        <Tab.Screen name="Repos" component={Repos} />
+        <Tab.Screen
+          name="Repos"
+          component={Repos}
+          options={{ tabBarBadge: 0 }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
