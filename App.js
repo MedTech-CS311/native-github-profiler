@@ -6,12 +6,31 @@ import Repos from "./screens/Repos";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+import Ionicons from "react-native-vector-icons/Ionicons";
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === "Profile") {
+              iconName = focused ? "person-circle" : "person-circle-outline";
+            } else if (route.name === "Repos") {
+              iconName = focused ? "list-circle" : "list-circle-outline";
+            }
+
+            // You can return any component that you like here!
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: "black",
+          tabBarInactiveTintColor: "gray",
+        })}
+      >
         <Tab.Screen name="Profile" component={Profile} />
         <Tab.Screen name="Repos" component={Repos} />
       </Tab.Navigator>
