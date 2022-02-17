@@ -1,10 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-// import profileReducer from "./profile/profile.reducer";
+import profileReducer from "./profile/profile.reducer";
 // import reposReducer from "./repos/repos.reducer";
 
 // Creating the root reducer by combining the reducers
 const rootReducer = combineReducers({
-  //   profile: profileReducer,
+  profile: profileReducer,
   //   repos: reposReducer,
 });
 
