@@ -33,7 +33,7 @@ const SingleRepository = ({ repo }) => {
 
 const styles = StyleSheet.create({
   repoContainer: {
-    border: "1px solid gray",
+    border: "2px solid silver",
     width: "95%",
     height: 50,
     padding: 5,
@@ -43,6 +43,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingLeft: 18,
     paddingRight: 18,
+    filter: "drop-shadow(0.1rem 0.1rem 0.1rem silver)",
+    borderRadius: 23,
+    backgroundColor: "white",
   },
   repoTitle: {
     fontWeight: 500,
