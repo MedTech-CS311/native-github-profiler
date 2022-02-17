@@ -4,6 +4,8 @@ import { fetchUserData } from "../redux/profile/profile.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
+import Ionicons from "react-native-vector-icons/Ionicons";
+
 export default function Profile() {
   const dispatch = useDispatch();
 
@@ -22,6 +24,15 @@ export default function Profile() {
         }}
       />
       <Text style={[styles.text, styles.title]}>{userData.login}</Text>
+      <Text style={styles.bio}>{userData.bio}</Text>
+      <View style={styles.itemContainer}>
+        <Ionicons name="location-outline" style={styles.itemText} />
+        <Text style={styles.itemText}>{userData.location}</Text>
+      </View>
+      <View style={styles.itemContainer}>
+        <Ionicons name="business-outline" style={styles.itemText} />
+        <Text style={styles.itemText}>{userData.company}</Text>
+      </View>
     </View>
   );
 }
@@ -47,5 +58,17 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "700",
     fontSize: 30,
+  },
+  bio: {
+    width: "80%",
+  },
+  itemContainer: {
+    flexDirection: "row",
+    gap: 4,
+    marginTop: 6,
+  },
+  itemText: {
+    color: "gray",
+    fontSize: 16,
   },
 });
