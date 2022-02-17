@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserRepos } from "../redux/repos/repos.actions";
 
 import SingleRepository from "../components/SingleRepository";
+import { ScrollView } from "react-native-web";
 
 export default function Repos() {
   const dispatch = useDispatch();
@@ -16,10 +17,11 @@ export default function Repos() {
 
   return (
     <View style={styles.container}>
-      <Text>Repositories List</Text>
-      {reposList.map((repo, index) => (
-        <SingleRepository key={index} repo={repo} />
-      ))}
+      <ScrollView>
+        {reposList.map((repo, index) => (
+          <SingleRepository key={index} repo={repo} />
+        ))}
+      </ScrollView>
     </View>
   );
 }
