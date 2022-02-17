@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserRepos } from "../redux/repos/repos.actions";
 
+import SingleRepository from "../components/SingleRepository";
+
 export default function Repos() {
   const dispatch = useDispatch();
 
@@ -14,7 +16,10 @@ export default function Repos() {
 
   return (
     <View style={styles.container}>
-      <Text>hello from repos</Text>
+      <Text>Repositories List</Text>
+      {reposList.map((repo, index) => (
+        <SingleRepository key={index} repo={repo} />
+      ))}
     </View>
   );
 }
