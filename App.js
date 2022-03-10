@@ -1,47 +1,67 @@
+// React Native
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+
+// Screens
 import Profile from "./screens/Profile";
 import Repos from "./screens/Repos";
+import Signup from "./screens/Signup";
+import Login from "./screens/Login";
 
+// Navigation
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 
+// Redux
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 export default function App() {
+  const isLoggedIn = false;
+
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Tab.Navigator
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-              let iconName;
+        {isLoggedIn ? (
+          <Tab.Navigator
+            screenOptions={({ route }) => ({
+              tabBarIcon: ({ focused, color, size }) => {
+                let iconName;
 
-              if (route.name === "Profile") {
-                iconName = focused ? "person-circle" : "person-circle-outline";
-              } else if (route.name === "Repos") {
-                iconName = focused ? "list-circle" : "list-circle-outline";
-              }
+                if (route.name === "Profile") {
+                  iconName = focused
+                    ? "person-circle"
+                    : "person-circle-outline";
+                } else if (route.name === "Repos") {
+                  iconName = focused ? "list-circle" : "list-circle-outline";
+                }
 
-              // You can return any component that you like here!
-              return <Ionicons name={iconName} size={size} color={color} />;
-            },
-            tabBarActiveTintColor: "black",
-            tabBarInactiveTintColor: "gray",
-          })}
-        >
-          <Tab.Screen name="Profile" component={Profile} />
-          <Tab.Screen
-            name="Repos"
-            component={Repos}
-            options={{ tabBarBadge: 0 }}
-          />
-        </Tab.Navigator>
+                // You can return any component that you like here!
+                return <Ionicons name={iconName} size={size} color={color} />;
+              },
+              tabBarActiveTintColor: "black",
+              tabBarInactiveTintColor: "gray",
+            })}
+          >
+            <Tab.Screen name="Profile" component={Profile} />
+            <Tab.Screen
+              name="Repos"
+              component={Repos}
+              options={{ tabBarBadge: 0 }}
+            />
+          </Tab.Navigator>
+        ) : (
+          <Stack.Navigator>
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Signup" component={Signup} />
+          </Stack.Navigator>
+        )}
       </NavigationContainer>
     </Provider>
   );
