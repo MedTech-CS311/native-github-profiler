@@ -1,77 +1,18 @@
-// React Native
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import Navigator from "./Navigator";
 
-// Screens
-import Profile from "./screens/Profile";
-import Repos from "./screens/Repos";
-import Signup from "./screens/Signup";
-import Login from "./screens/Login";
-
-// Navigation
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
-
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { PersistGate } from "redux-persist/integration/react";
 
 // Redux
 import { Provider } from "react-redux";
-import store from "./redux/store";
-
-const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
+import { store, persistor } from "./redux/store";
+import Loading from "./components/Loading";
 
 export default function App() {
-  const isLoggedIn = false;
-
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        {isLoggedIn ? (
-          <Tab.Navigator
-            screenOptions={({ route }) => ({
-              tabBarIcon: ({ focused, color, size }) => {
-                let iconName;
-
-                if (route.name === "Profile") {
-                  iconName = focused
-                    ? "person-circle"
-                    : "person-circle-outline";
-                } else if (route.name === "Repos") {
-                  iconName = focused ? "list-circle" : "list-circle-outline";
-                }
-
-                // You can return any component that you like here!
-                return <Ionicons name={iconName} size={size} color={color} />;
-              },
-              tabBarActiveTintColor: "black",
-              tabBarInactiveTintColor: "gray",
-            })}
-          >
-            <Tab.Screen name="Profile" component={Profile} />
-            <Tab.Screen
-              name="Repos"
-              component={Repos}
-              options={{ tabBarBadge: 0 }}
-            />
-          </Tab.Navigator>
-        ) : (
-          <Stack.Navigator>
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Signup" component={Signup} />
-          </Stack.Navigator>
-        )}
-      </NavigationContainer>
+      <PersistGate persistor={persistor} loading={Loading}>
+        <Navigator />
+      </PersistGate>
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
